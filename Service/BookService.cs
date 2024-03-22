@@ -23,5 +23,24 @@ namespace Book.CRUD.Service
            Books book =  this.storeageBroker.ReadBook(id);
             return book;
         }
+        public Books[] ReadAllBook()
+        {
+            var bookInfo = this.storeageBroker.GetAllBook();
+            if (bookInfo.Length is 0)
+            {
+                this.loggingBroker.LogError("Information not available.");
+            }
+            else
+            {
+                for (int itaration = 0; itaration < bookInfo.Length; itaration++)
+                {
+                    if (bookInfo[itaration] is not null)
+                    {
+                        this.loggingBroker.LogInformation($"{bookInfo[itaration].Id}.{bookInfo[itaration].Name} {bookInfo[itaration].Author}");
+                    }
+                }
+            }
+            return bookInfo;
+        }
     }
 }

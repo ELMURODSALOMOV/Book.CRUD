@@ -33,5 +33,6 @@ namespace Book.CRUD.Broker.Storeage
             }
             return new Books();
         }
+        public Books[] GetAllBook() => BooksInfo;
     }
 }
