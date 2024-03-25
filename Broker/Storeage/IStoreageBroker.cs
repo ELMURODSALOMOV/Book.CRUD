@@ -7,5 +7,6 @@ namespace Book.CRUD.Broker.Storeage
     {
         Books ReadBook(int id);
         Books[] GetAllBook();
+        Books AddBook(Books book);
     }
 }

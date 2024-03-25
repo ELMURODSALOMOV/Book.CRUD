@@ -34,5 +34,24 @@ namespace Book.CRUD.Broker.Storeage
             return new Books();
         }
         public Books[] GetAllBook() => BooksInfo;
+
+        public Books AddBook(Books book)
+        {
+            for(int itaration = 0;itaration < BooksInfo.Length;itaration++)
+            {
+                if (BooksInfo[itaration] is null)
+                {
+                    var bookInfo = new Books()
+                    {
+                        Id = book.Id,
+                        Name = book.Name,
+                        Author = book.Author,
+                    };
+                    BooksInfo[itaration] = bookInfo;
+                    return book;
+                }
+            }
+            return new Books();
+        }
     }
 }

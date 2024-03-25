@@ -11,5 +11,6 @@ namespace Book.CRUD.Service
     {
         Books GetBook(int id);
         Books[] ReadAllBook();
+        Books InsertBook(Books book);
     }
 }

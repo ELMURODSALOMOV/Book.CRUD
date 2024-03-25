@@ -23,6 +23,22 @@ namespace Book.CRUD.Service
            Books book =  this.storeageBroker.ReadBook(id);
             return book;
         }
+
+        public Books InsertBook(Books book)
+        {
+            var books =  this.storeageBroker.AddBook(book);
+            if (book is null)
+            {
+                this.loggingBroker.LogError("Invalid informmation");
+            }
+            else
+            {
+                this.loggingBroker.LogInformation("Added new information.");
+            }
+            return books;
+        }
+            
+
         public Books[] ReadAllBook()
         {
             var bookInfo = this.storeageBroker.GetAllBook();
