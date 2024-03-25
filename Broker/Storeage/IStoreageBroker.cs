@@ -9,5 +9,6 @@ namespace Book.CRUD.Broker.Storeage
         Books[] GetAllBook();
         Books AddBook(Books book);
         bool Update(int id, Books book);
+        bool Delete(int id);
     }
 }

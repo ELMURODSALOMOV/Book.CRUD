@@ -70,5 +70,25 @@ namespace Book.CRUD.Broker.Storeage
             }
             return false;
         }
+
+        public bool Delete(int id)
+        {
+            for(int itaration = 0; itaration < BooksInfo.Length; itaration++ )
+            {
+                Books res = BooksInfo[itaration];
+                if (BooksInfo[itaration] is not null)
+                {
+                    if (res.Id == id)
+                    {
+                        res.Id = 0;
+                        res.Name = null;
+                        res.Author = null;
+                        BooksInfo[itaration] = res;
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
     }
 }
