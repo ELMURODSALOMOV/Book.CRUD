@@ -58,5 +58,10 @@ namespace Book.CRUD.Service
             }
             return bookInfo;
         }
+
+        public bool Update(int id, Books book)
+        {
+           return this.storeageBroker.Update(id, book);
+        }
     }
 }
