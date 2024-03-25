@@ -18,6 +18,12 @@ namespace Book.CRUD.Service
             this.loggingBroker = new LoggingBroker();
             this.storeageBroker = new ArrayStoreageBroker();
         }
+
+        public bool Delete(int id)
+        {
+           return storeageBroker.Delete(id);
+        }
+
         public Books GetBook(int id)
         {
            Books book =  this.storeageBroker.ReadBook(id);
