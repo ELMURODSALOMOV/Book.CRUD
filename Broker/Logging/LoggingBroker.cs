@@ -15,7 +15,11 @@ namespace Book.CRUD.Broker.Logging
             Console.ResetColor();
         }
 
-        public void LogInformation(string message) => Console.WriteLine(message);
-        
+        public void LogInformation(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine(message);
+            Console.ResetColor();
+        }
     }
 }

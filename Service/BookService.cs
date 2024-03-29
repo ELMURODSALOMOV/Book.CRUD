@@ -21,8 +21,11 @@ namespace Book.CRUD.Service
 
         public bool Delete(int id)
         {
-           return storeageBroker.Delete(id);
+            return id is 0
+                   ? InvalidDeleteId()
+                   : ValidationAndDelete(id);
         }
+
 
         public Books GetBook(int id)
         {
@@ -82,6 +85,26 @@ namespace Book.CRUD.Service
                 }
                 return bookInformation;
             }
+        }
+        private bool ValidationAndDelete(int id)
+        {
+            bool isDelete = this.storeageBroker.Delete(id);
+            if(isDelete is true)
+            {
+                this.loggingBroker.LogInformation("The information in the id has been deleted.");
+                return isDelete;
+            }
+            else
+            {
+                this.loggingBroker.LogError("Id is Not Found.");
+                return isDelete;
+            }
+        }
+
+        private bool InvalidDeleteId()
+        {
+            this.loggingBroker.LogError("The id information is invalid.");
+            return false;
         }
 
         private Books InsertBookIsInvalid()
