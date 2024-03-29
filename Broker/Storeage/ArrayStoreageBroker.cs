@@ -54,14 +54,13 @@ namespace Book.CRUD.Broker.Storeage
             return new Books();
         }
 
-        public bool Update(int id, Books book)
+        public bool Update(Books book)
         {
             for (int itaration = 0; itaration < BooksInfo.Length; itaration++)
             {
                 Books bookInfoLine = BooksInfo[itaration];
-                if (bookInfoLine.Id == id)
+                if (bookInfoLine.Id == book.Id)
                 {
-                    bookInfoLine.Id = book.Id;
                     bookInfoLine.Name = book.Name;
                     bookInfoLine.Author = book.Author;
                     BooksInfo[itaration] = bookInfoLine;

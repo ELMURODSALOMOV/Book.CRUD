@@ -12,7 +12,7 @@ namespace Book.CRUD.Service
         Books GetBook(int id);
         Books[] ReadAllBook();
         Books InsertBook(Books book);
-        bool Update(int id, Books book);
+        bool Update(Books book);
         bool Delete(int id);
     }
 }

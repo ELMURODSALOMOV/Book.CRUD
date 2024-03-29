@@ -4,8 +4,6 @@ using Book.CRUD.Models;
 using Book.CRUD.Service;
 
 IBookService bookService = new BookService();
-//var book = bookService.GetBook(1);
-//Console.WriteLine($"{book.Id}. {book.Name}. {book.Author}");
 bool isContinue = true;
 do
 {
@@ -39,7 +37,7 @@ do
         book1.Name = Console.ReadLine();
         Console.Write("Enter Author ");
         book1.Author = Console.ReadLine();
-        bookService.Update(2, book1);
+        bookService.Update(book1);
     }
     if(command.Contains("4") is true)
     {

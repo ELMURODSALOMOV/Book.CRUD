@@ -58,11 +58,44 @@ namespace Book.CRUD.Service
             }
             return bookInfo;
         }
-
-        public bool Update(int id, Books book)
+        private bool ValidationAndUpdateBooks(Books book)
         {
-           return this.storeageBroker.Update(id, book);
+            if (book.Id is 0
+                || String.IsNullOrWhiteSpace(book.Name)
+                || String.IsNullOrWhiteSpace(book.Author))
+            {
+                this.loggingBroker.LogInformation("Book information is incomplete");
+                return false;
+            }
+            else
+            {
+                 bool isUpdate = this.storeageBroker.Update(book);
+                if(isUpdate is true)
+                {
+                    this.loggingBroker.LogInformation("Update.");
+                    return isUpdate;
+                }
+                else
+                {
+                    this.loggingBroker.LogInformation("Not found.");
+                    return isUpdate;
+                }
+            }
         }
+        private bool UpdateBooksInvalid()
+        {
+            this.loggingBroker.LogError("Book information is incomplete");
+            return false;
+        }
+
+        public bool Update(Books book)
+        {
+            return book is null
+                ? UpdateBooksInvalid()
+                : ValidationAndUpdateBooks(book);
+        }
+
+
         private Books ValidationAndInsertBook(Books book)
         {
             if (book.Id is 0
@@ -113,4 +146,5 @@ namespace Book.CRUD.Service
             return new Books();
         }
     }
+
 }
