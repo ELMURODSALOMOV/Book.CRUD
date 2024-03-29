@@ -32,19 +32,10 @@ namespace Book.CRUD.Service
 
         public Books InsertBook(Books book)
         {
-            var books =  this.storeageBroker.AddBook(book);
-            if (book is null)
-            {
-                this.loggingBroker.LogError("Invalid informmation");
-            }
-            else
-            {
-                this.loggingBroker.LogInformation("Added new information.");
-            }
-            return books;
+            return book is null
+                   ? InsertBookIsInvalid()
+                   : ValidationAndInsertBook(book);
         }
-            
-
         public Books[] ReadAllBook()
         {
             var bookInfo = this.storeageBroker.GetAllBook();
@@ -68,6 +59,35 @@ namespace Book.CRUD.Service
         public bool Update(int id, Books book)
         {
            return this.storeageBroker.Update(id, book);
+        }
+        private Books ValidationAndInsertBook(Books book)
+        {
+            if (book.Id is 0
+                || String.IsNullOrWhiteSpace(book.Name)
+                || String.IsNullOrWhiteSpace(book.Author))
+            {
+                this.loggingBroker.LogError("Invalid books information");
+                return new Books();
+            }
+            else
+            {
+                var bookInformation = this.storeageBroker.AddBook(book);
+                if(bookInformation is null)
+                {
+                    this.loggingBroker.LogInformation("Not Added book Info.");
+                }
+                else
+                {
+                    this.loggingBroker.LogInformation("Secssesfull.");
+                }
+                return bookInformation;
+            }
+        }
+
+        private Books InsertBookIsInvalid()
+        {
+            this.loggingBroker.LogError("Book info is null.");
+            return new Books();
         }
     }
 }
