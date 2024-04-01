@@ -29,10 +29,12 @@ namespace Book.CRUD.Service
 
         public Books GetBook(int id)
         {
-           Books book =  this.storeageBroker.ReadBook(id);
-            return book;
+            return id is 0
+                ? InvalidGetBookById()
+                : ValidationAndGetBook(id);
         }
 
+        
         public Books InsertBook(Books book)
         {
             return book is null
@@ -58,6 +60,35 @@ namespace Book.CRUD.Service
             }
             return bookInfo;
         }
+        private Books ValidationAndGetBook(int id)
+        {
+            if(String.IsNullOrWhiteSpace(id.ToString()))
+            {
+                this.loggingBroker.LogError("Information is invalid");
+                return new Books();
+            }
+            else
+            {
+                Books bookInfo = this.storeageBroker.ReadBook(id);
+                
+                if(bookInfo is null)
+                {
+                    this.loggingBroker.LogError("Not Found");
+                }
+                else
+                {
+                    this.loggingBroker.LogInformation("Sucssesfull.");
+                }
+                return bookInfo;
+            }    
+        }
+
+        private Books InvalidGetBookById()
+        {
+            this.loggingBroker.LogInformation("Id is invalid.");
+            return new Books();
+        }
+
         private bool ValidationAndUpdateBooks(Books book)
         {
             if (book.Id is 0
