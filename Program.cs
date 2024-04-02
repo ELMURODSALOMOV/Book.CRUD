@@ -7,7 +7,7 @@ IBookService bookService = new BookService();
 bool isContinue = true;
 do
 {
-    Console.WriteLine("1. Get All");
+    Console.WriteLine("1. Get All Book");
     Console.WriteLine("2. Add Book");
     Console.WriteLine("3. Update one book");
     Console.WriteLine("4. Delete one book");
