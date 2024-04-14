@@ -14,7 +14,12 @@ namespace Book.CRUD.Broker.Logging
             Console.WriteLine(userMessage);
             Console.ResetColor();
         }
-
+        public void LogError(Exception exception)
+        {
+            Console.ForegroundColor = ConsoleColor.Red;
+            Console.WriteLine("Error: " + exception.Message);
+            Console.ResetColor();
+        }
         public void LogInformation(string message)
         {
             Console.ForegroundColor = ConsoleColor.Green;
