@@ -11,6 +11,7 @@ do
     Console.WriteLine("2. Add Book");
     Console.WriteLine("3. Update one book");
     Console.WriteLine("4. Delete one book");
+    Console.WriteLine("5. Get book");
     Console.Write("Enter command ");
     string command = Console.ReadLine();
     if(command.Contains("2") is true)
@@ -44,6 +45,12 @@ do
         Console.Write("Enter the Id to delete ");
         int id =  Convert.ToInt32(Console.ReadLine());
         bookService.Delete(id);
+    }
+    if(command.Contains("5") is true)
+    {
+        Console.WriteLine("Enter id: ");
+        int id = Convert.ToInt32(Console.ReadLine());
+        bookService.GetBook(id);
     }
     Console.Write("Is Continue ");
     string isCommand = Console.ReadLine();
