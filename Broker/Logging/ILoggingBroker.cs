@@ -10,5 +10,6 @@ namespace Book.CRUD.Broker.Logging
     {
         void LogInformation(string message);
         void LogError(string userMessage);
+        void LogError(Exception exception);
     }
 }

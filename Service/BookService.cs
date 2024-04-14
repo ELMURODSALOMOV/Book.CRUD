@@ -21,25 +21,47 @@ namespace Book.CRUD.Service
 
         public bool Delete(int id)
         {
-            return id is 0
-                   ? InvalidDeleteId()
-                   : ValidationAndDelete(id);
+            try
+            {
+                return id is 0
+                       ? InvalidDeleteId()
+                       : ValidationAndDelete(id);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError(exception);
+                return false;
+            }
         }
-
 
         public Books GetBook(int id)
         {
-            return id is 0
-                ? InvalidGetBookById()
-                : ValidationAndGetBook(id);
+            try
+            {
+                return id is 0
+                    ? InvalidGetBookById()
+                    : ValidationAndGetBook(id);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError(exception);
+                return new Books();
+            }
         }
 
-        
         public Books InsertBook(Books book)
         {
-            return book is null
-                   ? InsertBookIsInvalid()
-                   : ValidationAndInsertBook(book);
+            try
+            {
+                return book is null
+                       ? InsertBookIsInvalid()
+                       : ValidationAndInsertBook(book);
+            }
+            catch (Exception exception)
+            {
+                this.loggingBroker.LogError(exception);
+                return new Books();
+            }
         }
         public Books[] ReadAllBook()
         {
